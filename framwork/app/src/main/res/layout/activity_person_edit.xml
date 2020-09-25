@@ -185,6 +185,12 @@
                 android:src="@drawable/bg_userface" />
         </LinearLayout>
 
+        <TextureView
+            android:id="@+id/person_edit_textureView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:visibility="gone" />
+
         <LinearLayout
             android:id="@+id/person_edit_layout_right"
             android:layout_width="wrap_content"
@@ -200,34 +206,12 @@
                 android:src="@drawable/icon_right" />
 
             <TextView
+                android:id="@+id/person_edit_tv_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="人证对比通过"
                 android:textColor="@color/green_015F33"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/person_edit_layout_wrong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="16dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_wrong" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="人证对比失败，请重新采集信息"
-                android:textColor="@color/red_E51010"
                 android:textSize="15sp" />
         </LinearLayout>
 

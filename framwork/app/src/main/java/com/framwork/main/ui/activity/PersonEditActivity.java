@@ -1,13 +1,23 @@
 package com.framwork.main.ui.activity;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.TextureView;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -24,22 +34,39 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.bumptech.glide.Glide;
+import com.decard.muye.sdk.FaceCallBack;
+import com.decard.muye.sdk.ICardCallBack;
+import com.decard.muye.sdk.IPersonFaceManager;
+import com.decard.muye.sdk.InitDeviceCallBack;
+import com.decard.muye.sdk.MuyeIDCard;
+import com.decard.muye.sdk.RemoteFaceService;
+import com.decard.muye.sdk.camera.CameraUtils;
+import com.decard.muye.sdk.utils.Base64Utils;
+import com.decard.muye.sdk.utils.FileUtils;
 import com.framwork.common.ui.activity.BaseFragmentActivity;
+import com.framwork.common.utils.LogUtil;
 import com.framwork.common.utils.ResUtil;
+import com.framwork.common.utils.SPManager;
 import com.framwork.common.utils.ToastUtil;
 import com.framwork.common.widget.ClearAbleEditText;
-import com.framwork.main.event.EditEvent;
+import com.framwork.main.GlobalConstants;
 import com.framwork.main.R;
 import com.framwork.main.bean.ConditionsBean;
 import com.framwork.main.bean.EmployeeBean;
 import com.framwork.main.bean.UserInfoBean;
+import com.framwork.main.event.EditEvent;
 import com.framwork.main.ui.contract.PersonEditContract;
 import com.framwork.main.ui.presenter.PersonEditPresenter;
 import com.framwork.main.util.ImageUtil;
 import com.framwork.main.util.LoginUtil;
+import com.zkteco.android.IDReader.IDPhotoHelper;
+import com.zkteco.android.IDReader.WLTService;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,7 +85,7 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
     private ImageView mPersonEditImgFace;
     private ImageView mPersonEditImgId;
     private LinearLayout mPersonEditLayoutRight;
-    private LinearLayout mPersonEditLayoutWrong;
+    private LinearLayout mPersonEditLayoutWrong, person_edit_layout_info;
     private ClearAbleEditText mPersonEditEtName;
     private ClearAbleEditText mPersonEditEtId;
     private RelativeLayout mPersonEditLayoutSex;
@@ -91,7 +118,7 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
     private TextView mPersonEditTvWorktype;
     private TextView mPersonEditTvFanchang;
     private TextView mPersonEditTvAddinfo;
-    private TextView mPersonEditTvTeam;
+    private TextView mPersonEditTvTeam, person_edit_tv_result;
     
     private String projectId, id, name = "", id_number = "", minzu = "", address = "", phone = "", zhengshu_number, hetong_number;
     
@@ -101,7 +128,7 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
             popView_chizheng, popView_unit, popView_team, popView_role, popView_pro, popView_worktype;
     private int index_sex, index_zhengzhi, index_jiguan, index_wenhua, index_leader, index_peixun,
             index_chizheng, index_unit = -1, index_team = -1, index_role = -1, index_worktype = -1, index_pro;
-    
+    private TextureView person_edit_textureView;
     private ConditionsBean conditionsBean;
     private UserInfoBean userInfo;
     private EmployeeBean employeeBean;
@@ -115,6 +142,7 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
     private ArrayList<String> pro_names = new ArrayList<>();
     private TimePickerView pvTime;
     private String person_edit_unitId = "", person_edit_teamId = "", person_edit_roleType = "", person_edit_workType = "";
+    private IPersonFaceManager faceManager;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +162,8 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
     @Override
     public void onDestroy() {
         super.onDestroy();
+        stopCompare();
+        CameraUtils.getInstance().closeCamera();
     }
     
     @Override
@@ -195,6 +225,9 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
         mPersonEditTvFanchang = findViewById(R.id.person_edit_tv_fanchang);
         mPersonEditTvAddinfo = findViewById(R.id.person_edit_tv_addinfo);
         mPersonEditTvTeam = findViewById(R.id.person_edit_tv_team);
+        person_edit_textureView = findViewById(R.id.person_edit_textureView);
+        person_edit_layout_info = findViewById(R.id.person_edit_layout_info);
+        person_edit_tv_result = findViewById(R.id.person_edit_tv_result);
         popView_sex = View.inflate(this, R.layout.view_popupwindow, null);
         popupWindow_sex = new PopupWindow(popView_sex);
         popView_zhengzhi = View.inflate(this, R.layout.view_popupwindow, null);
@@ -222,6 +255,7 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
         setPickView();
         setOnclick();
         setEdit();
+        initSDK();
     }
     
     @Override
@@ -233,6 +267,247 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
     private void hideSoftKeyBoard() {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(this.getWindow().getDecorView().getWindowToken(), 0);
+    }
+    
+    private void initSDK() {
+        CameraUtils.getInstance().startCamera(person_edit_textureView, this);
+        
+        //        DialogUtil.getInstance().init(this);
+        
+        Intent intent = new Intent(this, RemoteFaceService.class);
+        bindService(intent, connection, BIND_AUTO_CREATE);
+        startService(intent);
+    }
+    
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtil.e("onServiceConnected");
+            faceManager = IPersonFaceManager.Stub.asInterface(service);
+            initDevice();   //设备初始化
+        }
+        
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtil.e("onServiceDisconnected");
+        }
+    };
+    
+    public void initDevice() {
+        if(faceManager != null) {
+            String APP_ID = SPManager.getManager("param").getString(GlobalConstants.SPConstants.APP_ID);
+            String SDK_KEY = SPManager.getManager("param").getString(GlobalConstants.SPConstants.SDK_KEY);
+            String SOFT_ID = SPManager.getManager("param").getString(GlobalConstants.SPConstants.SOFT_ID);
+            String LOG_ID = SPManager.getManager("param").getString(GlobalConstants.SPConstants.LOG_ID);
+            String PRO_NUM = SPManager.getManager("param").getString(GlobalConstants.SPConstants.PRO_NUM);
+            try {
+                faceManager.initDevice(
+                        APP_ID,   //虹软分配的APPID
+                        SDK_KEY,   //虹软分配的APPKey
+                        SOFT_ID,  //授权管理软件appID
+                        PRO_NUM,  //项目编号
+                        LOG_ID,//日志管理系统密钥
+                        new InitDeviceCallBack.Stub() {
+                            @Override
+                            public void initCallBack(int errorCode) throws RemoteException {
+                                LogUtil.e("初始化返回值  " + errorCode);
+                                //errorCode == 0 执行初始化人脸算法
+                                if(errorCode == 0) {
+                                    initFace();  //初始化人脸
+                                }
+                            }
+                        });
+                
+                
+            } catch(RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void initFace() {
+        if(faceManager != null) {
+            try {
+                faceManager.initFace(SPManager.getManager("param").getString(GlobalConstants.SPConstants.FACE_SERVER), new FaceCallBack.Stub() {
+                    @Override
+                    public void success(String message) {
+                        LogUtil.e("初始化人脸  " + message);
+                    }
+                    
+                    @Override
+                    public void fail(String errorMsg) {
+                        LogUtil.e(errorMsg);
+                        showToast("人脸信息异常  " + errorMsg);
+                    }
+                    
+                });
+            } catch(RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void readId() {
+        if(faceManager != null) {
+            try {
+                faceManager.startReadId(new ICardCallBack.Stub() {
+                    @Override
+                    public void onError(String errmsg) {
+                        LogUtil.e("onError: " + errmsg);
+                    }
+                    
+                    @Override
+                    public void onSuccess(MuyeIDCard idCard) {
+                        
+                        if(idCard != null) {
+                            LogUtil.d("onSuccess: 身份证信息  " + idCard.getName() + "     " + Thread.currentThread().getName());
+                            if(idCard.getPhotolength() > 0) {
+                                byte[] buf = new byte[WLTService.imgLength];
+                                if(1 == WLTService.wlt2Bmp(idCard.getPhoto(), buf)) {
+                                    Bitmap bitmap = IDPhotoHelper.Bgr2Bitmap(buf);
+                                    
+                                    runOnUiThread(() -> mPersonEditImgFace.setImageBitmap(bitmap));
+                                }
+                            }
+                            startCompare(idCard, 0);
+                        }
+                        
+                    }
+                    
+                });
+            } catch(RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void startCompare(MuyeIDCard idCard, int type) {
+        
+        if(faceManager != null) {
+            try {
+                //读取到的身份证信息
+                faceManager.stopCompare();
+                if(idCard.getPhotolength() > 0 && type == 0) {
+                    byte[] buf = new byte[WLTService.imgLength];
+                    if(1 == WLTService.wlt2Bmp(idCard.getPhoto(), buf)) {
+                        Bitmap bitmap = IDPhotoHelper.Bgr2Bitmap(buf);
+                        
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mPersonEditImgFace.setImageBitmap(bitmap);
+                                
+                            }
+                        });
+                        File file = FileUtils.bitmapToFile(bitmap, String.valueOf(System.currentTimeMillis()));  //用身份证照片人脸注册
+                        if(file == null) {
+                            
+                            return;
+                        }
+                        faceManager.startCompare(file.getPath(), type, new FaceCallBack.Stub() {
+                            @Override
+                            public void success(String message) {  //成功返回Base64人脸信息
+                                LogUtil.d(message);
+                                String[] split = message.split("\\|");
+                                
+                                runOnUiThread(() -> {
+                                    //显示人脸信息，相似度
+                                    try {
+                                        byte[] decodeBytes = Base64Utils.decode(split[0]);  //人脸照片
+                                        YuvImage image = new YuvImage(decodeBytes, ImageFormat.NV21, 640, 480, null);
+                                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                        image.compressToJpeg(new Rect(0, 0, 640, 480), 80, stream);
+                                        Bitmap bitmap1 = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
+                                        Bitmap rotateBitmap = CameraUtils.getInstance().rotate(bitmap1, 90f);
+                                        
+                                        stopCompare();
+                                        deleteFile(file.getName());
+                                        String idMsg = idCard.getName().trim() + "|" + idCard.getSex() + "|" + idCard.getNation() + "|" + idCard.getBirth() + "|"
+                                                + idCard.getAddress().trim() + "|" + idCard.getId() + "|" + idCard.getValidityTime() + "|"
+                                                + Base64Utils.encode(idCard.getPhoto()) + "|";
+                                        name = idCard.getName();
+                                        minzu = idCard.getNation();
+                                        address = idCard.getAddress();
+                                        mPersonEditEtName.setText(idCard.getName());
+                                        mPersonEditTvSex.setText(idCard.getSex());
+                                        mPersonEditEtMinzu.setText(idCard.getNation());
+                                        mPersonEditTvBirthday.setText(idCard.getBirth());
+                                        mPersonEditEtAddress.setText(idCard.getAddress());
+                                        
+                                        person_edit_textureView.setVisibility(View.GONE);
+                                        mPersonEditLayoutRight.setVisibility(View.VISIBLE);
+                                        mPersonEditImgId.setImageBitmap(rotateBitmap);
+                                        int p = Integer.valueOf(split[1]) * 100;
+                                        person_edit_tv_result.setText("相似度:" + split[1] + "%");
+                                    } catch(UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+                            }
+                            
+                            
+                            @Override
+                            public void fail(String errorMsg) {
+                                stopCompare();
+                                LogUtil.e(errorMsg);
+                                showToast(errorMsg);
+                            }
+                        });
+                    }
+                }
+                else {
+                    LogUtil.e("startCompare: 无身份证信息，直接获取照片并上传");
+                    faceManager.startCompare(null, type, new FaceCallBack.Stub() {
+                        @Override
+                        public void success(String message) {  //成功返回Base64人脸信息
+                            LogUtil.d(message);
+                            //上传人脸信息，上传人证信息
+                            String idMsg = idCard.getName().trim() + "|" + idCard.getSex() + "|" + idCard.getNation() + "|" + idCard.getBirth() + "|" + idCard.getAddress().trim() + "|" + idCard.getId() + "|" + idCard.getValidityTime() + "|" + "|";
+                            person_edit_textureView.setVisibility(View.GONE);
+                            mPersonEditLayoutRight.setVisibility(View.VISIBLE);
+                            person_edit_tv_result.setText("相似度:" + "0%");
+                            name = idCard.getName();
+                            minzu = idCard.getNation();
+                            address = idCard.getAddress();
+                            mPersonEditEtName.setText(idCard.getName());
+                            mPersonEditTvSex.setText(idCard.getSex());
+                            mPersonEditEtMinzu.setText(idCard.getNation());
+                            mPersonEditTvBirthday.setText(idCard.getBirth());
+                            mPersonEditEtAddress.setText(idCard.getAddress());
+                        }
+                        
+                        
+                        @Override
+                        public void fail(String errorMsg) {
+                            LogUtil.e(errorMsg);
+                            showToast(errorMsg);
+                        }
+                    });
+                }
+                
+            } catch(RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private void showToast(String errorMsg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtil.showToast(errorMsg);
+            }
+        });
+    }
+    
+    private void stopCompare() {
+        if(faceManager != null) {
+            try {
+                faceManager.stopCompare();
+            } catch(RemoteException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     private void setPickView() {
@@ -365,6 +640,15 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
             public void onClick(View v) {
                 hideSoftKeyBoard();
                 pvTime.show();
+            }
+        });
+        person_edit_layout_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(View.VISIBLE != person_edit_textureView.getVisibility()) {
+                    person_edit_textureView.setVisibility(View.VISIBLE);
+                    readId();
+                }
             }
         });
         mPersonEditTvAddinfo.setOnClickListener(new View.OnClickListener() {

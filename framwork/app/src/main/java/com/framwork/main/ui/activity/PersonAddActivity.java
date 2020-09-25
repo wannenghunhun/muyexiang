@@ -45,7 +45,6 @@ import com.decard.muye.sdk.camera.CameraUtils;
 import com.decard.muye.sdk.utils.Base64Utils;
 import com.decard.muye.sdk.utils.FileUtils;
 import com.framwork.common.ui.activity.BaseFragmentActivity;
-import com.framwork.common.utils.AppUtil;
 import com.framwork.common.utils.LogUtil;
 import com.framwork.common.utils.ResUtil;
 import com.framwork.common.utils.SPManager;
@@ -161,6 +160,11 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
         super.onDestroy();
         stopCompare();
         CameraUtils.getInstance().closeCamera();
+    }
+    
+    @Override
+    public void onStop() {
+        super.onStop();
     }
     
     @Override
