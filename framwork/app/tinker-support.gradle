@@ -1,0 +1,54 @@
+// patch 差异包生成参考 根目录下的 Bugly.txt 文件
+apply plugin: 'com.tencent.bugly.tinker-support'
+
+def bakPath = file("${buildDir}/bakApk/")
+
+/**
+ * 此处填写每次构建生成的基准包目录
+ *  将基准包及mapping R 文件复制进去 app/build/bakApk/baseApkDir 文件夹中
+ *  baseApkDir 不存在则创建并复制进去
+ */
+def baseApkDir = "baseApkDir"
+def isDebug = "release"  //debug或者release
+// 不需要更改，会动态变化
+def tinkId = "zwlcs-v${rootProject.appVersion.versionName}-${new Date().format("MMddHHmm")}"
+
+/**
+ * 对于插件各参数的详细解析请参考
+ */
+tinkerSupport {
+
+    // 开启tinker-support插件，默认值true
+    enable = true
+
+    // 指定归档目录，默认值当前module的子目录tinker
+    autoBackupApkDir = "${bakPath}"
+
+    autoGenerateTinkerId = true
+
+    // 是否启用覆盖tinkerPatch配置功能，默认值false
+    // 开启后tinkerPatch配置不生效，即无需添加tinkerPatch
+    overrideTinkerPatchConfiguration = true
+
+    // 编译补丁包时，必需指定基线版本的apk，默认值为空
+    // 如果为空，则表示不是进行补丁包的编译
+    // @{link tinkerPatch.oldApk }
+    baseApk = "${bakPath}/${baseApkDir}/app-release-unsigned.apk"
+
+    // 对应tinker插件applyMapping
+    baseApkProguardMapping = "${bakPath}/${baseApkDir}/app-release-mapping.txt"
+
+    // 对应tinker插件applyResourceMapping
+    baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt"
+
+    tinkerId = "${tinkId}"
+
+//    buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
+    // 是否开启加固模式，默认为false
+    isProtectedApp = true
+//    是否采用反射Application的方式集成，无须改造Application
+    enableProxyApplication = true
+
+    supportHotplugComponent = true
+
+}

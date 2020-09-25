@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressView">
+        <attr name="frameCount" format="integer" />
+        <attr name="duration" format="integer" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CommonButton">
+        <attr name="disable" format="boolean" />
+        <attr name="display" format="boolean" />
+        <attr name="status" format="boolean" />
+        <attr name="isValid" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="IdentifyingCodeView">
+        <attr name="icv_et_number" format="integer" />
+        <attr name="icv_et_divider_drawable" format="reference" />
+        <attr name="icv_et_text_size" format="dimension" />
+        <attr name="icv_et_text_color" format="color" />
+        <attr name="icv_et_bg_focus" format="reference" />
+        <attr name="icv_et_bg_normal" format="reference" />
+        <attr name="icv_et_bg_has_data" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="VerifyEdit">
+    <!--输入框数量-->
+    <attr name="inputCount" format="integer" />
+    <!--输入框间距-->
+    <attr name="inputSpace" format="dimension" />
+    <!--下划线厚度-->
+    <attr name="underlineHeight" format="dimension" />
+    <!--输入框文本大小-->
+    <attr name="mTextSize" format="dimension" />
+    <!--输入文本颜色-->
+    <attr name="mTextColors" format="color"/>
+    <!--下划线选中的颜色-->
+    <attr name="focusColor" format="color" />
+    <!--下划线未选中的颜色-->
+    <attr name="defaultColor" format="color" />
+    <!--下划线距文本的距离-->
+    <attr name="underlineSpace" format="dimension" />
+    <!--光标-->
+    <attr name="cursorDrawable" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="LimitScrollView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ClearAbleEditText">
+        <attr name="clearIcon" format="reference" />
+        <attr name="clearAble" format="boolean" />
+    </declare-styleable>
+
+</resources>

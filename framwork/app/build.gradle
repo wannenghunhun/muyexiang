@@ -1,0 +1,197 @@
+apply plugin: 'com.android.application'
+apply from: 'tinker-support.gradle'
+apply plugin: 'bugly'
+
+bugly {
+    appId = '0ef9d5f714' // 注册时分配的App ID
+    appKey = 'a0a84e5e-ac5b-4285-b634-f49ea79b1e98' // 注册时分配的App Key
+}
+
+// 根节点下增加
+def createTime() {
+
+    return new Date().format("MMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
+
+}
+
+android {
+    compileSdkVersion rootProject.compileVer.compileSdkVersion
+    buildToolsVersion rootProject.compileVer.buildToolsVersion
+    defaultConfig {
+        applicationId "com.framwork.main"
+        minSdkVersion rootProject.compileVer.minSdkVersion
+        targetSdkVersion rootProject.compileVer.targetSdkVersion
+        versionCode rootProject.appVersion.versionCode
+        versionName rootProject.appVersion.versionName
+        multiDexEnabled true
+        buildConfigField("boolean", "SHOW_LOG", "true")
+
+
+        ndk {
+            // 选择要添加的对应cpu类型的.so库
+            abiFilters 'armeabi-v7a'
+        }
+
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    //配置keystore签名
+    signingConfigs {
+        release {
+            storeFile file('../muye.jks')
+            keyAlias 'zhongwanglicaishi'
+            keyPassword '123456'
+            storePassword '123456'
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+            resValue("string", "svn_info", getSvnLastInfo())
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-fresco.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
+            buildConfigField("boolean", "SHOW_LOG", "false")
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-fresco.pro'
+        }
+
+        //打包后应用名称
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                def fileName
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    if (variant.buildType.name.equals('release')) {//如果是release包
+                        fileName = "app_release_v${defaultConfig.versionName}_${createTime()}.apk"
+                    } else if (variant.buildType.name.equals('debug')) {//如果是debug包
+                        fileName = "app_test_v${defaultConfig.versionName}_${createTime()}.apk"
+                    }
+                    outputFileName = fileName
+                }
+            }
+        }
+
+        configurations.all {
+            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+                def requested = details.requested
+                if (requested.group == 'com.android.support') {
+                    if (!requested.name.startsWith("multidex")) {
+                        details.useVersion '27.1.1'//27.1.1为当前版本号
+                    }
+                }
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    dexOptions {
+        javaMaxHeapSize "8g"
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    packagingOptions {
+        exclude 'AndroidManifest.xml'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':okhttputils')
+    implementation project(':CommonLib')
+    implementation rootProject.dependenciesRep.supportV7
+    implementation rootProject.dependenciesRep.constraintLayout
+    implementation rootProject.dependenciesRep.multidex
+    implementation rootProject.dependenciesRep.design
+    implementation rootProject.dependenciesRep.logger
+    implementation rootProject.dependenciesRep.walle
+    implementation rootProject.dependenciesRep.bugly
+    implementation rootProject.dependenciesRep.tinker
+//    implementation rootProject.dependenciesRep.jpush
+//    implementation rootProject.dependenciesRep.jcore
+    implementation rootProject.dependenciesRep.arouterApi
+    implementation 'com.android.support.constraint:constraint-layout:2.0.1'
+    annotationProcessor rootProject.dependenciesRep.arouterCompiler
+//    implementation rootProject.dependenciesRep.jsbridge
+    implementation rootProject.dependenciesRep.easypermissions
+//    implementation rootProject.dependenciesRep.fresco
+    //    implementation rootProject.dependenciesRep.frescoGif
+    //    implementation rootProject.dependenciesRep.butterknife
+    //    annotationProcessor rootProject.dependenciesRep.butterknifeCompiler
+    implementation rootProject.dependenciesRep.smartRefresh
+//    implementation rootProject.dependenciesRep.banner
+    implementation rootProject.dependenciesRep.flexbox
+    implementation rootProject.dependenciesRep.eventbus
+//    implementation rootProject.dependenciesRep.wechat
+//    implementation rootProject.dependenciesRep.Luban
+    implementation rootProject.dependenciesRep.PickView
+    implementation rootProject.dependenciesRep.Glide
+    implementation rootProject.dependenciesRep.WheelView
+//    debugImplementation rootProject.dependenciesRep.leakcanary
+//    debugImplementation rootProject.dependenciesRep.blockcanary
+    debugImplementation rootProject.dependenciesRep.stetho
+    debugImplementation rootProject.dependenciesRep.stethoJs
+    debugImplementation rootProject.dependenciesRep.stethoOkHttp3
+    debugImplementation rootProject.dependenciesRep.acraCore
+    debugImplementation rootProject.dependenciesRep.acraDialog
+//    implementation files('libs/open_sdk_r44f141d_lite.jar')
+    implementation(name: 'muyeSDK-release', ext: 'aar')  //发布版本
+    implementation('com.decard.mobile:dc-licensesdk:2.0.00') {
+        exclude group: 'com.decard.mobile', module: 'dc-libreadsn'
+    }
+    implementation 'com.decard.mobile:dc-libreadsn:0.0.9'
+    //解析json
+    implementation 'com.alibaba:fastjson:1.2.60'
+    //version 2.1.01
+    implementation 'com.decard.mobile:logansdk-utils:2.2.03'
+}
+
+
+
+project.afterEvaluate {
+    tasks.findByName("assembleDebug").doLast {
+        copyARouter("debug")
+    }.doFirst {
+        deleteARouter()
+    }
+    tasks.findByName("assembleRelease").doLast {
+        copyARouter("release")
+    }.doFirst {
+        deleteARouter()
+    }
+}

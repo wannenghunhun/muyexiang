@@ -1,0 +1,92 @@
+ext {
+
+    appVersion = [
+            versionCode: 001,
+            versionName: "0.0.1"
+    ]
+
+    compileVer = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 19,
+            targetSdkVersion : 29,
+    ]
+
+    classpathRep = [
+            tinker            : 'com.tencent.bugly:tinker-support:1.1.5',
+            symtabfileuploader: 'com.tencent.bugly:symtabfileuploader:2.1.2',
+            walle             : 'com.meituan.android.walle:plugin:1.1.5',
+    ]
+
+    dependenciesRep = [
+            supportV7           : "com.android.support:appcompat-v7:27.1.1",
+            constraintLayout    : "com.android.support.constraint:constraint-layout:1.1.0",
+            multidex            : "com.android.support:multidex:1.0.1",
+            design              : "com.android.support:design:27.1.1",
+
+            //    https://github.com/bumptech/glide
+            //    https://bumptech.github.io/glide/
+            GlideAnnotaition    : "com.github.bumptech.glide:compiler:4.7.1",
+            Glide               : "com.github.bumptech.glide:glide:4.7.1",
+            GlideTransformations: "jp.wasabeef:glide-transformations:3.3.0",
+
+            //   https://github.com/square/okhttp
+            Okhttp3             : "com.squareup.okhttp3:okhttp:4.1.0",
+            Gson                : "com.google.code.gson:gson:2.8.2",
+            // https://github.com/orhanobut/logger
+            logger              : 'com.orhanobut:logger:2.2.0',
+            // https://github.com/Meituan-Dianping/walle
+            walle               : 'com.meituan.android.walle:library:1.1.5',
+
+            //    https://github.com/square/leakcanary
+            leakcanary          : "com.squareup.leakcanary:leakcanary-android:1.5.4",
+            // https://github.com/markzhai/AndroidPerformanceMonitor
+            blockcanary         : "com.github.markzhai:blockcanary-android:1.5.0",
+            // http://facebook.github.io/stetho/
+            stetho              : "com.facebook.stetho:stetho:1.5.0",
+            stethoJs            : "com.facebook.stetho:stetho-js-rhino:1.5.0",
+            stethoOkHttp3       : "com.facebook.stetho:stetho-okhttp3:1.5.0",
+
+            // https://bugly.qq.com/docs/user-guide/instruction-manual-android-upgrade/?v=20180709165613
+            bugly               : 'com.tencent.bugly:crashreport_upgrade:1.3.5',
+            // https://github.com/Tencent/tinker
+            // http://tinkerpatch.com/Docs/SDK
+            tinker              : 'com.tencent.tinker:tinker-android-lib:1.9.8',
+            // https://github.com/ACRA/acra
+            acraCore            : "ch.acra:acra-core:5.2.1",
+            acraDialog          : "ch.acra:acra-dialog:5.2.1",
+
+            //https://github.com/lzyzsd/JsBridge
+            jsbridge            : "com.github.lzyzsd:jsbridge:1.0.4",
+            // https://docs.jiguang.cn/jpush/client/Android/android_guide/
+            jpush               : "cn.jiguang.sdk:jpush:3.1.6",
+            jcore               : "cn.jiguang.sdk:jcore:1.2.5",
+            //https://github.com/alibaba/ARouter
+            arouterApi          : 'com.alibaba:arouter-api:1.4.1',
+            arouterCompiler     : 'com.alibaba:arouter-compiler:1.2.2',
+            //https://github.com/googlesamples/easypermissions
+            easypermissions     : 'pub.devrel:easypermissions:1.0.1',
+            //https://github.com/facebook/fresco
+            // https://www.fresco-cn.org/
+            fresco              : 'com.facebook.fresco:fresco:1.11.0',
+            frescoGif           : 'com.facebook.fresco:animated-gif:1.11.0',
+            //https://github.com/JakeWharton/butterknife
+            butterknife         : 'com.jakewharton:butterknife:8.8.1',
+            butterknifeCompiler : 'com.jakewharton:butterknife-compiler:8.8.1',
+            //https://github.com/scwang90/SmartRefreshLayout
+            smartRefresh        : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14',
+            //https://blog.csdn.net/qq_36621990/article/details/76020236
+            banner              : 'com.youth.banner:banner:1.4.9',
+            // https://github.com/google/flexbox-layout
+            flexbox             : 'com.google.android:flexbox:1.0.0',
+
+            eventbus            : 'org.greenrobot:eventbus:3.1.1',
+            wechat              : 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+',
+            // https://github.com/Bigkoo/Android-PickerView
+            PickView            : 'com.contrarywind:Android-PickerView:4.1.9',
+            // https://github.com/Curzibn/Luban
+            Luban               : 'top.zibin:Luban:1.1.8',
+            WheelView           : 'com.wx.wheelview:wheelview:1.3.3'
+    ]
+
+}

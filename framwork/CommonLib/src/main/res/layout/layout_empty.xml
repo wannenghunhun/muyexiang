@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_empty_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:drawablePadding="20dp"
+        android:drawableTop="@drawable/ic_empty"
+        android:text="暂时没有数据"
+        android:gravity="center_horizontal"
+        android:textColor="@color/c_9496A3"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/btn_empty_again"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tv_empty_txt"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="30dp"
+        android:background="@null"
+        android:layout_marginRight="15dp"
+        android:text="点击屏幕刷新"
+        android:textColor="@color/c_3CAFF6"
+        android:textSize="14sp" />
+    
+    <Button
+        android:id="@+id/btn_recharge"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/btn_empty_again"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/white"/>
+</RelativeLayout>

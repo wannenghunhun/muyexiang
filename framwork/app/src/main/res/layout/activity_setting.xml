@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="虹软APPID"
+            android:textColor="@color/gray_666666"
+            android:textSize="13sp" />
+
+        <com.framwork.common.widget.ClearAbleEditText
+            android:id="@+id/setting_et_appid"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:textColor="@color/black_FF333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="虹软APPKEY"
+            android:textColor="@color/gray_666666"
+            android:textSize="13sp" />
+
+        <com.framwork.common.widget.ClearAbleEditText
+            android:id="@+id/setting_et_appkey"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:textColor="@color/black_FF333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="软件APPID"
+            android:textColor="@color/gray_666666"
+            android:textSize="13sp" />
+
+        <com.framwork.common.widget.ClearAbleEditText
+            android:id="@+id/setting_et_soft_id"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:textColor="@color/black_FF333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:text="日志系统秘钥"
+            android:textColor="@color/gray_666666"
+            android:textSize="13sp" />
+
+        <com.framwork.common.widget.ClearAbleEditText
+            android:id="@+id/setting_et_log_key"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:textColor="@color/black_FF333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:text="项目编号"
+            android:textColor="@color/gray_666666"
+            android:textSize="13sp" />
+
+        <com.framwork.common.widget.ClearAbleEditText
+            android:id="@+id/setting_et_pro_num"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:textColor="@color/black_FF333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@null"
+            android:text="人脸服务器地址"
+            android:textColor="@color/gray_666666"
+            android:textSize="13sp" />
+
+        <com.framwork.common.widget.ClearAbleEditText
+            android:id="@+id/setting_et_face_server"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@null"
+            android:textColor="@color/black_FF333333"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/setting_btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_stoken_green"
+                android:text="取消"
+                android:textColor="@color/green_015F33"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/setting_btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_cornor"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

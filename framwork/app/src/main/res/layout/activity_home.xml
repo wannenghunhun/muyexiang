@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/home_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/green_015F33">
+
+        <ImageView
+            android:id="@+id/home_img_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/icon_small_logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_toLeftOf="@+id/home_tv_logout"
+            android:layout_toRightOf="@+id/home_img_logo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="欢迎您"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/home_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="张某某" />
+
+            <TextView
+                android:id="@+id/home_tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="2020-10-10" />
+
+            <TextView
+                android:id="@+id/home_tv_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="星期六" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/home_tv_logout"
+            android:layout_width="44dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_cornor_white"
+            android:gravity="center"
+            android:text="退出"
+            android:textColor="@color/green_015F33"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/home_layout_pro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_layout_top"
+        android:background="@color/green_0F7B3B">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="当前项目"
+            android:textColor="@color/green_A1C3B3" />
+
+        <TextView
+            android:id="@+id/home_tv_pro_chose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="选择项目"
+            android:textColor="@color/green_B9C81B" />
+
+        <TextView
+            android:id="@+id/home_tv_pro_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_tv_pro_chose"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/green_C5F0DC"
+            android:textSize="15sp"
+            tools:text="中关村生命科学园三期及北四村棚户区改造和环境整治安置房项目C组团工程" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/home_layout_pro_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_layout_pro"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp">
+
+        <LinearLayout
+            android:id="@+id/home_layout_pro_title"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_project" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="项目信息"
+                android:textColor="@color/black_FF333333"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_layout_unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_layout_pro_title"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="总包单位"
+                android:textColor="@color/c_999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/home_tv_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black_FF333333"
+                android:textSize="13sp"
+                tools:text="中国新兴建筑工程有限责任公司" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_layout_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_layout_unit"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="施工地址"
+                android:textColor="@color/c_999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/home_tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black_FF333333"
+                android:textSize="13sp"
+                tools:text="北京市昌平区生命园路20号北京市昌平区生命园路20号北京市昌平区生命园路20号" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_layout_content1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_layout_address"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/home_layout_manager"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_layout_unit"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="项目经理"
+                    android:textColor="@color/c_999999"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/home_tv_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/black_FF333333"
+                    android:textSize="13sp"
+                    tools:text="马某某" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_layout_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_layout_unit"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="联系方式"
+                    android:textColor="@color/c_999999"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/home_tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/black_FF333333"
+                    android:textSize="13sp"
+                    tools:text="13812345678" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_layout_content2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_layout_content1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/home_layout_area"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_layout_unit"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="施工面积"
+                    android:textColor="@color/c_999999"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/home_tv_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/black_FF333333"
+                    android:textSize="13sp"
+                    tools:text="34148.92m2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/home_layout_pro_state"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_layout_unit"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="项目状态"
+                    android:textColor="@color/c_999999"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/home_tv_pro_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/black_FF333333"
+                    android:textSize="13sp"
+                    tools:text="施工中" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray_EFEFEF" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/home_layout_person_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_person" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="人员信息"
+                android:textColor="@color/black_FF333333"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_layout_person_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/icon_add" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="人员录入"
+                android:textColor="@color/green_015F33"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/home_layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp">
+
+        <LinearLayout
+            android:id="@+id/home_layout_type"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:background="@drawable/button_cornor_gray"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="姓名"
+                android:textColor="@color/black_FF333333"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/icon_arrow_down" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_layout_key"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toLeftOf="@+id/home_layout_state"
+            android:layout_toRightOf="@+id/home_layout_type"
+            android:background="@drawable/button_cornor_gray"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <com.framwork.common.widget.ClearAbleEditText
+                android:id="@+id/home_et_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@null"
+                android:hint="输入查询关键字"
+                android:textColor="@color/black_FF222222"
+                android:textColorHint="@color/gray_C6C8C8"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/home_layout_state"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_toLeftOf="@id/home_tv_search"
+            android:background="@drawable/button_cornor_gray"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="在场"
+                android:textColor="@color/black_FF333333"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/icon_arrow_down" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/home_tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="搜索"
+            android:textColor="@color/black_FF333333"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/home_fragment_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+</LinearLayout>

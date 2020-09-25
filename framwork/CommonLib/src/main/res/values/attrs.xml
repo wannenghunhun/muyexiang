@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBar">
+        <!--标题-->
+        <attr name="titleText" format="string" />
+        <!--标题字体颜色-->
+        <attr name="titleTextColor" format="color" />
+        <!--标题字体大小-->
+        <attr name="titleTextSize" format="dimension" />
+        <!--标题栏背景-->
+        <attr name="titleBackground" format="color" />
+        <!--标题栏返回按钮图片-->
+        <attr name="titleBackIcon" format="reference" />
+        <!--标题栏返回按钮图片是否显示-->
+        <attr name="titleBackIconVisible" format="boolean" />
+        <!--标题栏底部分割线是否显示-->
+        <attr name="titleDividerVisible" format="boolean" />
+        <!--标题栏底部分割线颜色-->
+        <attr name="titleDividerColor" format="color" />
+        <!--标题栏右侧布局-->
+        <attr name="rightLayout" format="reference" />
+        <!--标题栏左侧布局-->
+        <attr name="leftLayout" format="reference" />
+        <!--标题栏中间布局-->
+        <attr name="centerLayout" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="GestureLockView">
+        <!--选中的图-->
+        <attr name="selectDrawable" format="reference" />
+        <!--没选中图-->
+        <attr name="normalDrawable" format="reference" />
+        <!--错误图-->
+        <attr name="errorDrawable" format="reference" />
+        <!--行数-->
+        <attr name="rowNums" format="integer" />
+        <!--列数-->
+        <attr name="columnNums" format="integer" />
+        <!--图片宽-->
+        <attr name="dotWidth" format="dimension" />
+        <!--图片高度-->
+        <attr name="dotHeight" format="dimension" />
+        <!--点与点水平间距-->
+        <attr name="spaceH" format="dimension" />
+        <!--点与点竖直间距-->
+        <attr name="spaceV" format="dimension" />
+        <!--线的颜色 绘制状态下-->
+        <attr name="lineColor" format="color" />
+        <!--线的颜色 错误状态下-->
+        <attr name="lineErrorColor" format="color" />
+        <!--线的宽度-->
+        <attr name="lineWidth" format="dimension" />
+        <!--是否自动选中中间的点-->
+        <attr name="autoSelectMiddle" format="boolean" />
+        <!--多少毫秒以后清空-->
+        <attr name="delayClearTime" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="ProgressView">
+        <attr name="frameCount" format="integer" />
+        <attr name="duration" format="integer" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CommonButton">
+        <attr name="disable" format="boolean" />
+        <attr name="display" format="boolean" />
+        <attr name="status" format="boolean" />
+        <attr name="isValid" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="IdentifyingCodeView">
+        <attr name="icv_et_number" format="integer" />
+        <attr name="icv_et_divider_drawable" format="reference" />
+        <attr name="icv_et_text_size" format="dimension" />
+        <attr name="icv_et_text_color" format="color" />
+        <attr name="icv_et_bg_focus" format="reference" />
+        <attr name="icv_et_bg_normal" format="reference" />
+        <attr name="icv_et_bg_has_data" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="VerifyEdit">
+        <!--输入框数量-->
+        <attr name="inputCount" format="integer" />
+        <!--输入框间距-->
+        <attr name="inputSpace" format="dimension" />
+        <!--下划线厚度-->
+        <attr name="underlineHeight" format="dimension" />
+        <!--输入框文本大小-->
+        <attr name="mTextSize" format="dimension" />
+        <!--输入文本颜色-->
+        <attr name="mTextColors" format="color"/>
+        <!--下划线选中的颜色-->
+        <attr name="focusColor" format="color" />
+        <!--下划线未选中的颜色-->
+        <attr name="defaultColor" format="color" />
+        <!--下划线距文本的距离-->
+        <attr name="underlineSpace" format="dimension" />
+        <!--光标-->
+        <attr name="cursorDrawable" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="LimitScrollView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ClearAbleEditText">
+        <attr name="clearIcon" format="reference" />
+        <attr name="clearAble" format="boolean" />
+    </declare-styleable>
+</resources>

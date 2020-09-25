@@ -1,0 +1,53 @@
+<resources>
+	
+	<!-- 基本主题-->
+	<style name="BaseAppTheme" parent="Theme.AppCompat.NoActionBar">
+		<item name="colorAccent">@color/gray_FF9395A0</item>
+	</style>
+	
+	<style name="AppTheme.NoActionBar">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+	
+	<!-- Base application theme. -->
+	<style name="AppTheme" parent="BaseAppTheme">
+		<!-- Customize your theme here. -->
+	</style>
+	
+	<style name="ProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+		<item name="android:maxHeight">15dip</item>
+		<item name="android:minHeight">10dip</item>
+		<item name="android:indeterminateOnly">false</item>
+		<item name="android:indeterminateDrawable">@color/green</item>
+	</style>
+	
+	<style name="AppTheme.startTheme" parent="AppTheme">
+		<item name="android:windowIsTranslucent">false</item>
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowDisablePreview">true</item>
+	</style>
+	
+	
+	<!-- dialog 背景不透明-->
+	<style name="confirm_dialog" parent="@android:style/Theme.Dialog">
+		<item name="android:windowFrame">@null</item>
+		<!-- 边框 -->
+		<item name="android:windowIsFloating">true</item>
+		<!-- 是否浮现在activity之上 -->
+		<item name="android:windowNoTitle">true</item>
+		<!-- 无标题 -->
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<!-- 背景透明 -->
+		<item name="android:backgroundDimEnabled">true</item>
+		<!-- 模糊 -->
+		<item name="android:windowIsTranslucent">true</item>
+		<!-- 半透明 -->
+	</style>
+
+	<style name="mypopwindow_anim_style">
+		<item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+		<item name="android:windowExitAnimation">@anim/slide_out_top</item>
+	</style>
+
+</resources>

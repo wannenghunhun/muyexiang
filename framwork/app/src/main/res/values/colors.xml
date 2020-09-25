@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="alpha_white">#00FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="green">#33CC00</color>
+    <color name="c_999999">#999999</color>
+    <color name="c_CF5241">#CF5241</color>
+    <color name="c_3F4346">#3F4346</color>
+    <color name="c_EAECF1">#EAECF1</color>
+    <color name="c_9496A3">#9496A3</color>
+    <color name="c_3CAFF6">#3CAFF6</color>
+    <color name="c_F34F36">#F34F36</color>
+    <color name="c_34374F">#34374F</color>
+    <color name="c_C4C6D1">#C4C6D1</color>
+    <color name="white_FFF7F7F7">#FFF7F7F7</color>
+    <color name="c_BBBBBB">#BBBBBB</color>
+    <color name="c_1E2127">#1E2127</color>
+    <color name="c_2496E8">#2496E8</color>
+    <!--gray-->
+    <color name="gray_FFEFF0F3">#FFEFF0F3</color>
+    <color name="gray_FFEAECF1">#FFEAECF1</color>
+    <color name="gray_FF3F4346">#FF3F4346</color>
+    <color name="gray_FFF5F5F5">#FFF5F5F5</color>
+    <color name="gray_FFE9EBF0">#FFE9EBF0</color>
+    <color name="gray_FFD7D7D7">#FFD7D7D7</color>
+    <color name="gray_FF9496A3">#FF9496A3</color>
+    <color name="gray_FFC2C3C8">#FFC2C3C8</color>
+    <color name="gray_FFDEE4E9">#FFDEE4E9</color>
+    <color name="gray_FFE1E1E1">#FFE1E1E1</color>
+    <color name="gray_FF34374F">#FF34374F</color>
+    <color name="gray_B4B6C1">#B4B6C1</color>
+    <color name="gray_FFC4C6D1">#FFC4C6D1</color>
+    <color name="gray_D6D8DD">#D6D8DD</color>
+    <color name="gray_FFF8F9FA">#FFF8F9FA</color>
+    <color name="gray_FFF8F9FB">#FFF8F9FB</color>
+    <color name="gray_FFDDDDDD">#FFDDDDDD</color>
+    <color name="gray_FF808080">#FF808080</color>
+    <color name="gray_BFBFBF">#BFBFBF</color>
+    <color name="gray_FF9395A0">#FF9395A0</color>
+    <color name="gray_FFE7E7E7">#FFE7E7E7</color>
+    <color name="gray_FF89909C">#FF89909C</color>
+    <color name="gray_FFC1C2CC">#FFC1C2CC</color>
+    <color name="gray_FFD8D8D8">#FFD8D8D8</color>
+    <color name="gray_FFD0D5DB">#FFD0D5DB</color>
+    <color name="gray_FFFEFAF1">#FFFEFAF1</color>
+    <color name="gray_FFE0E2E4">#FFE0E2E4</color>
+    <color name="gray_FF606266">#FF606266</color>
+    <color name="gray_FF989AA4">#989AA4</color>
+    <color name="gray_F7F7F7">#F7F7F7</color>
+    <color name="gray_C6C8C8">#C6C8C8</color>
+    <color name="gray_EFEFEF">#EFEFEF</color>
+    <color name="gray_666666">#666666</color>
+    <color name="gray_F9F9F9">#FFF9F9F9</color>
+
+    <!--black-->
+    <color name="black_FF414141">#FF414141</color>
+    <color name="black_FF3F4346">#FF3F4346</color>
+    <color name="black_FF222222">#FF222222</color>
+    <color name="black_34374F">#34374F</color>
+    <color name="black_FF333333">#FF333333</color>
+    <color name="black_FF1E2127">#FF1E2127</color>
+    <color name="black_FF262B37">#FF262B37</color>
+    <color name="black_80000000">#80000000</color>
+
+    <!--orange-->
+    <color name="orange_FFF34F36">#FFF34F36</color>
+    <drawable name="trans_default">@android:color/transparent</drawable>
+
+    <!--blue-->
+    <color name="blue_FF3CAFF6">#FF3CAFF6</color>
+    <color name="blue_FF4A90E2">#FF4A90E2</color>
+    <color name="blue_FF2496E8">#FF2496E8</color>
+
+    <!--green-->
+    <color name="green_FF66AD1E">#FF66AD1E</color>
+    <color name="green_5EAB0B">#5EAB0B</color>
+    <color name="green_00612E">#FF00612E</color>
+    <color name="green_C3D300">#FFC3D300</color>
+    <color name="green_015F33">#015F33</color>
+    <color name="green_0F7B3B">#0F7B3B</color>
+    <color name="green_A1C3B3">#A1C3B3</color>
+    <color name="green_B9C81B">#B9C81B</color>
+    <color name="green_C5F0DC">#C5F0DC</color>
+
+
+    <!--red-->
+    <color name="red_FFD0021B">#FFD0021B</color>
+    <color name="red_FFF33726">#FFF33726</color>
+    <color name="red_FF934C47">#FF934C47</color>
+    <color name="red_FF552A18">#FF552A18</color>
+    <color name="c_FFEFF0F3">#FFEFF0F3</color>
+    <color name="c_E24F2A">#E24F2A</color>
+    <color name="c_262B37">#262B37</color>
+    <color name="c_9395A0">#9395A0</color>
+    <color name="c_D8AA55">#D8AA55</color>
+    <color name="c_C2C3C8">#C2C3C8</color>
+    <color name="c_9B9DA9">#9B9DA9</color>
+    <color name="c_F4F5F7">#F4F5F7</color>
+    <color name="c_F35A42">#F35A42</color>
+    <color name="red_E51010">#E51010</color>
+
+    <!--gold-->
+    <color name="gold_CEB159">#CEB159</color>
+    <color name="gold_FFD8AA55">#FFD8AA55</color>
+    <!--70% gold-->
+    <color name="gold_B3D8AA55">#B3D8AA55</color>
+    <color name="gold_FFCB9B41">#FFCB9B41</color>
+
+    <color name="dialog_title_color">#3F4346</color>
+    <color name="dialog_content_color">#555555</color>
+    <color name="dialog_right_btn_color">@color/white</color>
+    <color name="divider">#D7D7D7</color>
+    <color name="C_29A6FF">#29A6FF</color>
+    <color name="txt_second_main">#848495</color>
+
+    <color name="divider_gray">#F2F4F6</color>
+    <color name="black_FF555555">#FF555555</color>
+    <color name="red_FFFE6528">#FFFE6528</color>
+
+    <color name="red">#F32735</color>
+    <color name="shadow">#99000000</color>
+    <color name="c_606266">#606266</color>
+
+    <color name="transparent">#00000000</color>
+</resources>

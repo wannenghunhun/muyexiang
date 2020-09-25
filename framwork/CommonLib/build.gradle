@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.compileVer.compileSdkVersion
+    buildToolsVersion rootProject.compileVer.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.compileVer.minSdkVersion
+        targetSdkVersion rootProject.compileVer.targetSdkVersion
+        multiDexEnabled true
+        buildConfigField("boolean", "SHOW_LOG", "true")
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+dependencies {
+    implementation project(':okhttputils')
+    implementation rootProject.dependenciesRep.supportV7
+    implementation rootProject.dependenciesRep.design
+    implementation rootProject.dependenciesRep.logger
+    implementation rootProject.dependenciesRep.constraintLayout
+    implementation rootProject.dependenciesRep.multidex
+    implementation rootProject.dependenciesRep.walle
+    implementation rootProject.dependenciesRep.bugly
+    implementation rootProject.dependenciesRep.tinker
+    implementation rootProject.dependenciesRep.constraintLayout
+    api rootProject.dependenciesRep.Okhttp3
+    implementation rootProject.dependenciesRep.bugly
+    implementation rootProject.dependenciesRep.tinker
+    implementation rootProject.dependenciesRep.smartRefresh
+}

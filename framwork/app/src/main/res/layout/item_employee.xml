@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:paddingBottom="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/item_employee_layout_header"
+            android:layout_width="96dp"
+            android:layout_height="120dp">
+
+            <ImageView
+                android:id="@+id/item_employee_img_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_userface" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/item_employee_layout_header">
+
+            <TextView
+                android:id="@+id/item_employee_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_FF333333"
+                android:textSize="15sp"
+                tools:text="名字" />
+
+            <RelativeLayout
+                android:id="@+id/item_employee_layout_img"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_toStartOf="@+id/item_employee_tv_duty"
+                android:layout_toEndOf="@+id/item_employee_tv_name">
+
+                <ImageView
+                    android:id="@+id/item_employee_img_editor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/icon_edit" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/item_employee_tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_employee_tv_name"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black_FF333333"
+                android:textSize="15sp"
+                tools:text="手机号" />
+
+            <TextView
+                android:id="@+id/item_employee_tv_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/item_employee_tv_group"
+                android:textColor="@color/c_999999"
+                android:textSize="14sp"
+                tools:text="公司" />
+
+            <TextView
+                android:id="@+id/item_employee_tv_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/c_999999"
+                android:textSize="14sp"
+                tools:text="班组" />
+
+            <TextView
+                android:id="@+id/item_employee_tv_duty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/green_0F7B3B"
+                android:textSize="15sp"
+                tools:text="职位" />
+
+            <TextView
+                android:id="@+id/item_employee_tv_state"
+                android:layout_width="96dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

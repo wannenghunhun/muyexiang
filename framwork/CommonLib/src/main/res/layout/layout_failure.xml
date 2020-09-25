@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dip"
+            android:src="@drawable/ic_failure" />
+
+        <TextView
+            android:id="@+id/tv_failure_txt"
+            android:text="哎呀，服务器出了点小问题..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dip"
+            android:textColor="@color/c_9496A3"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btn_failure_again"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:paddingTop="30dp"
+            android:background="@null"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:text="点击屏幕刷新"
+            android:textColor="@color/c_3CAFF6"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

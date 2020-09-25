@@ -1,0 +1,63 @@
+buildscript {
+    apply from: "config.gradle"
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        google()
+        jcenter()
+        mavenCentral() // add repository
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath rootProject.classpathRep.tinker
+        classpath rootProject.classpathRep.symtabfileuploader
+        classpath rootProject.classpathRep.walle
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven { url 'http://47.93.180.222:8081/repository/mobile-releases/' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def static getSvnLastInfo() {
+    try {
+        return "svn log -l 10 --xml".execute().text.trim()
+    } catch (Exception e) {
+        return ""
+    }
+}
+
+
+def copyARouter(String buildType) {
+    File srcFile = file("./app/build/generated/source/apt/$buildType/com/alibaba/android/arouter/docs/arouter-map-of-app.json")
+    if (srcFile.exists()) {
+        srcFile.renameTo(getTargetFile())
+        println("Copy arouter-map-of-app.json to " + getTargetFile())
+    }
+}
+
+
+def deleteARouter() {
+    File targetFile = file(getTargetFile())
+    if (targetFile.exists()) {
+        targetFile.delete()
+    }
+}
+
+static def getTargetFile() {
+    def dir = System.getProperty("user.dir")
+    if (dir.endsWith("app")) {
+        dir = dir.substring(0, dir.length() - 3)
+    }
+    return dir + File.separator + "AppRouter.json"
+}

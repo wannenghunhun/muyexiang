@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="block_canary_display_activity_label">NDLR_Blocks</string>
+    <string name="leak_canary_display_activity_label">NDLR_Leaks</string>
+
+</resources>
