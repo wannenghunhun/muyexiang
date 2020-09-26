@@ -11,11 +11,11 @@ public class RouterConstants {
     
     public static final String ROUTER_PATH_KEY = "path";
     
-    //Router_Key
+    //Router_name
     public static final String ROUTER_INVALID_KEY = "nonTransition"; // 无效url 不处理
     public static final String ROUTER_LOGIN_KEY = "login";//登录
     
-    //Router_Target
+    //Router_path
     public static final String ROUTER_INVALID = ""; // 无效url 不处理
     public static final String ROUTER_LOGIN = "/app/LoginActivity";//登录
     

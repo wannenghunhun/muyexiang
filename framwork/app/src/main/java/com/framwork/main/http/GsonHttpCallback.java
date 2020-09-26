@@ -2,6 +2,7 @@ package com.framwork.main.http;
 
 import com.framwork.common.utils.LogUtil;
 import com.framwork.common.utils.ToastUtil;
+import com.framwork.main.util.LoginUtil;
 import com.framwork.okhttputils.adapter.ParameterizedTypeImpl;
 import com.framwork.okhttputils.callback.Callback;
 import com.framwork.okhttputils.utils.GsonUtil;
@@ -86,7 +87,7 @@ public abstract class GsonHttpCallback<T> extends Callback<ResultBean<T>> {
     
     protected void onShouldReLogin(ResultBean<T> t) {
         ToastUtil.showToast(t.msg);
-        //        LoginUtil.forceLogOut();
+        LoginUtil.gologOut();
     }
     
     protected abstract void response(ResultBean<T> t);

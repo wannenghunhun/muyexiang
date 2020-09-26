@@ -393,7 +393,7 @@
                 android:layout_marginStart="8dp"
                 android:text="人员录入"
                 android:textColor="@color/green_015F33"
-                android:textSize="13sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </RelativeLayout>
 

@@ -1,9 +1,13 @@
 package com.framwork.main.ui.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -34,6 +38,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class HomeActivity extends BaseFragmentActivity<HomeContract.Presenter> implements HomeContract.View {
     private LinearLayout home_layout_person_add;
@@ -68,6 +75,27 @@ public class HomeActivity extends BaseFragmentActivity<HomeContract.Presenter> i
     private EmployeeListFragment employeeListFragment;
     private UserInfoBean userInfoBean;
     private ProjectInfoBean projectInfo;
+    private static final int PERMISSON_REQUESTCODE = 200;
+    private static final int PERMISSON_DYNAMIC_REQUESTCODE = 300;
+    
+    /**
+     * 需要进行检测的权限数组
+     */
+    protected String[] needPermissions = {
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_LOGS,
+            Manifest.permission.INTERNET,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA
+    };
+    protected String[] dynamicPermission = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA,
+    };
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +130,7 @@ public class HomeActivity extends BaseFragmentActivity<HomeContract.Presenter> i
     
     @Override
     protected void initView() {
+        doCheck();
         home_layout_person_add = findViewById(R.id.home_layout_person_add);
         mHomeTvName = findViewById(R.id.home_tv_name);
         mHomeTvDate = findViewById(R.id.home_tv_date);
@@ -137,6 +166,56 @@ public class HomeActivity extends BaseFragmentActivity<HomeContract.Presenter> i
     
     @Override
     protected void initData(@NonNull Bundle bundle) {
+    }
+    
+    private void doCheck() {
+        /*检查权限*/
+        checkPermissions(needPermissions);
+        /*获取权限*/
+        getPermissions();
+        
+    }
+    
+    private void checkPermissions(String... permissions) {
+        List<String> needRequestPermissonList = findDeniedPermissions(permissions);
+        if(null != needRequestPermissonList
+                && needRequestPermissonList.size() > 0) {
+            ActivityCompat.requestPermissions(this,
+                    needRequestPermissonList.toArray(
+                            new String[needRequestPermissonList.size()]),
+                    PERMISSON_REQUESTCODE);
+        }
+    }
+    
+    private List<String> findDeniedPermissions(String[] permissions) {
+        List<String> needRequestPermissonList = new ArrayList<String>();
+        for(String perm : permissions) {
+            if(ContextCompat.checkSelfPermission(this,
+                    perm) != PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.shouldShowRequestPermissionRationale(
+                    this, perm)) {
+                needRequestPermissonList.add(perm);
+            }
+        }
+        return needRequestPermissonList;
+    }
+    
+    private void getPermissions() {
+        //检查是否已经赋予动态申请的权限
+        if(EasyPermissions.hasPermissions(this, dynamicPermission)) {
+            // 成功获取权限
+        }
+        else {
+            //有权限没有被赋予去请求权限
+            EasyPermissions.requestPermissions(this, "重要权限", PERMISSON_DYNAMIC_REQUESTCODE, dynamicPermission);
+        }
+    }
+    
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(requestCode == PERMISSON_DYNAMIC_REQUESTCODE) {
+            EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        }
     }
     
     private void setFragment(String projectID) {
@@ -177,10 +256,11 @@ public class HomeActivity extends BaseFragmentActivity<HomeContract.Presenter> i
         mHomeTvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginUtil.clearUserData();
-                Intent i = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
+                //                LoginUtil.clearUserData();
+                //                Intent i = new Intent(HomeActivity.this, LoginActivity.class);
+                //                startActivity(i);
+                //                finish();
+                LoginUtil.gologOut();
             }
         });
         mHomeTvSearch.setOnClickListener(new View.OnClickListener() {

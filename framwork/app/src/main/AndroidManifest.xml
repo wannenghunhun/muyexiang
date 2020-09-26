@@ -40,7 +40,7 @@
             android:required="false" />
 
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".ui.activity.WelcomeActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.startTheme">
@@ -53,6 +53,9 @@
         </activity>
         <activity
             android:name=".ui.activity.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.SettingActivity"

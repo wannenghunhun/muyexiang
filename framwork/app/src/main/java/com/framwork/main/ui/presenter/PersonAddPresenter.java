@@ -40,25 +40,27 @@ public class PersonAddPresenter extends PersonAddContract.Presenter {
                     @Override
                     public void onAfter() {
                         if(isViewAttached()) {
-                            getView().dissLoading();
                         }
                     }
                     
                     @Override
                     protected void error(ResultBean<ConditionsBean> t) {
                         ToastUtil.showToast(t.msg);
+                        getView().dissLoading();
                     }
                     
                     @Override
                     protected void response(ResultBean<ConditionsBean> t) {
                         if(isViewAttached()) {
                             getView().setConditionsInfo(t.data);
+                            getView().dissLoading();
                         }
                     }
                     
                     @Override
                     protected void onNetFail(ResultBean<ConditionsBean> t) {
                         ToastUtil.showNetError();
+                        getView().dissLoading();
                     }
                 });
     }
@@ -77,25 +79,27 @@ public class PersonAddPresenter extends PersonAddContract.Presenter {
             @Override
             public void onAfter() {
                 if(isViewAttached()) {
-                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void error(ResultBean<UserInfoBean> t) {
                 ToastUtil.showToast(t.msg);
+                getView().dissLoading();
             }
             
             @Override
             protected void response(ResultBean<UserInfoBean> t) {
                 if(isViewAttached()) {
                     getView().setProjectInfo(t.data);
+                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void onNetFail(ResultBean<UserInfoBean> t) {
                 ToastUtil.showNetError();
+                getView().dissLoading();
             }
         });
     }
@@ -167,25 +171,27 @@ public class PersonAddPresenter extends PersonAddContract.Presenter {
             @Override
             public void onAfter() {
                 if(isViewAttached()) {
-                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void error(ResultBean<BaseBean> t) {
                 ToastUtil.showToast(t.msg);
+                getView().dissLoading();
             }
             
             @Override
             protected void response(ResultBean<BaseBean> t) {
                 if(isViewAttached()) {
                     getView().editResult(t.msg);
+                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void onNetFail(ResultBean<BaseBean> t) {
                 ToastUtil.showNetError();
+                getView().dissLoading();
             }
         });
     }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.framwork.common.GlobalContext;
 import com.framwork.common.helper.AppActiveHelper;
 import com.framwork.common.helper.ServerHelper;
@@ -50,10 +51,10 @@ public class MyApplication extends Application {
         GlobalTools.installLog(BuildConfig.SHOW_LOG);
         addActivityLifeCycle(new DLRActivityLifecycle());
         addFragmentLifeCycle(new DLRFragmentLifecycle());
-//        ServerHelper.init(ServerHelper.ServerReleaseType, new ReleaseServerConfig());
-//        AppActiveHelper.install(this);
+        ARouter.init(this);
+        //        ServerHelper.init(ServerHelper.ServerReleaseType, new ReleaseServerConfig());
+        //        AppActiveHelper.install(this);
         initOkHttpClient();
-        initParam();
     }
     
     protected void initOkHttpClient() {
@@ -67,13 +68,6 @@ public class MyApplication extends Application {
         OkHttpUtils.init(builder, true);
     }
     
-    protected void initParam() {
-        SPManager.getManager("param").commitString("APP_ID", GlobalConstants.ParamConstants.APP_ID);
-        SPManager.getManager("param").commitString("SDK_KEY", GlobalConstants.ParamConstants.SDK_KEY);
-        SPManager.getManager("param").commitString("SOFT_ID", GlobalConstants.ParamConstants.SOFT_ID);
-        SPManager.getManager("param").commitString("LOG_ID", GlobalConstants.ParamConstants.LOG_ID);
-        SPManager.getManager("param").commitString("FACE_SERVER", GlobalConstants.ParamConstants.FACE_SERVER);
-    }
     
     protected final void addActivityLifeCycle(IActivityLifecycle activityLife) {
         ActivityLifecycle.addActivityLife(activityLife);

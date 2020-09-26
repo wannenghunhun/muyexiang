@@ -47,25 +47,27 @@ public class PersonListPresenter extends PersonListContract.Presenter {
             @Override
             public void onAfter() {
                 if(isViewAttached()) {
-                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void error(ResultBean<EmployeesBean> t) {
                 ToastUtil.showToast(t.msg);
+                getView().dissLoading();
             }
             
             @Override
             protected void response(ResultBean<EmployeesBean> t) {
                 if(isViewAttached()) {
                     getView().setViews(t.data, isRefresh);
+                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void onNetFail(ResultBean<EmployeesBean> t) {
                 ToastUtil.showNetError();
+                getView().dissLoading();
             }
         });
     }

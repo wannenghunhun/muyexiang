@@ -39,25 +39,27 @@ public class HomePresenter extends HomeContract.Presenter {
             @Override
             public void onAfter() {
                 if(isViewAttached()) {
-                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void error(ResultBean<UserInfoBean> t) {
                 ToastUtil.showToast(t.msg);
+                getView().dissLoading();
             }
             
             @Override
             protected void response(ResultBean<UserInfoBean> t) {
                 if(isViewAttached()) {
                     getView().setUserInfo(t.data);
+                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void onNetFail(ResultBean<UserInfoBean> t) {
                 ToastUtil.showNetError();
+                getView().dissLoading();
             }
         });
     }
@@ -76,25 +78,27 @@ public class HomePresenter extends HomeContract.Presenter {
             @Override
             public void onAfter() {
                 if(isViewAttached()) {
-                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void error(ResultBean<ProjectInfoBean> t) {
                 ToastUtil.showToast(t.msg);
+                getView().dissLoading();
             }
             
             @Override
             protected void response(ResultBean<ProjectInfoBean> t) {
                 if(isViewAttached()) {
                     getView().setProjectInfo(t.data);
+                    getView().dissLoading();
                 }
             }
             
             @Override
             protected void onNetFail(ResultBean<ProjectInfoBean> t) {
                 ToastUtil.showNetError();
+                getView().dissLoading();
             }
         });
     }

@@ -23,7 +23,7 @@ public class LoginUtil {
     public static void gologOut() {
         clearUserData();
         goLogin();
-//        ActivityManager.retain(LoginActivity.class);
+        ActivityManager.retain(LoginActivity.class);
         // DialogManager.getInstance().clearDialog();
         // EventBus.getDefault().post(new LoginEvent.LoginOff());
     }
@@ -31,7 +31,7 @@ public class LoginUtil {
     
     public static void goLogin() {
         // 发起登录
-        ARouter.getInstance().build(RouterConstants.ROUTER_LOGIN_KEY).navigation();
+        ARouter.getInstance().build(RouterConstants.ROUTER_LOGIN).navigation();
     }
     
     /**

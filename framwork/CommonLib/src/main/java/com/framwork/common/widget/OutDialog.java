@@ -13,7 +13,7 @@ import com.framwork.common.R;
 
 
 /**
- * 操作失败弹窗
+ * 离场弹窗
  */
 public class OutDialog extends Dialog {
     
