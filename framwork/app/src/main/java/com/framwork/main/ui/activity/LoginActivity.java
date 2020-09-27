@@ -39,27 +39,6 @@ public class LoginActivity extends BaseFragmentActivity<LoginContract.Presenter>
     private ClearAbleEditText loginEtAccount;
     private ClearAbleEditText loginEtPassword;
     private String account, password;
-    private static final int PERMISSON_REQUESTCODE = 200;
-    private static final int PERMISSON_DYNAMIC_REQUESTCODE = 300;
-    
-    /**
-     * 需要进行检测的权限数组
-     */
-    protected String[] needPermissions = {
-            Manifest.permission.ACCESS_WIFI_STATE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_LOGS,
-            Manifest.permission.INTERNET,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.CAMERA
-    };
-    protected String[] dynamicPermission = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.CAMERA,
-    };
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +82,6 @@ public class LoginActivity extends BaseFragmentActivity<LoginContract.Presenter>
     @Override
     protected void initData(@NonNull Bundle bundle) {
     }
-    
-    
     
     private void setEdit() {
         TextWatcher textWatcher = new TextWatcher() {

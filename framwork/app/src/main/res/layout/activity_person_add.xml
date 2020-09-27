@@ -170,14 +170,14 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/person_add_img_id"
+                android:id="@+id/person_add_img_face"
                 android:layout_width="190dp"
                 android:layout_height="240dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/bg_userface" />
 
             <ImageView
-                android:id="@+id/person_add_img_face"
+                android:id="@+id/person_add_img_id"
                 android:layout_width="190dp"
                 android:layout_height="240dp"
                 android:layout_marginStart="16dp"

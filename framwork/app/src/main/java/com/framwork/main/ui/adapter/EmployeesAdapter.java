@@ -56,7 +56,7 @@ public class EmployeesAdapter extends SimpleRecycleParentListAdapter<EmployeesBe
         viewHolder.setText(R.id.item_employee_tv_duty, item.workType);
         
         ImageView item_employee_img_header = viewHolder.findViewById(R.id.item_employee_img_header);
-        Glide.with(context).load(item.photoPath).apply(ImageUtil.getRequestOptions()).into(item_employee_img_header);
+        Glide.with(context).load(item.photoPath).into(item_employee_img_header);
         
         TextView item_employee_tv_state = viewHolder.findViewById(R.id.item_employee_tv_state);
         if(0 == item.status) {//离场

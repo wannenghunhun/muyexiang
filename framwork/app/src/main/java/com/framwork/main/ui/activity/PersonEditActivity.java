@@ -36,6 +36,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.bumptech.glide.Glide;
 import com.decard.muye.sdk.FaceCallBack;
 import com.decard.muye.sdk.ICardCallBack;
+import com.decard.muye.sdk.IDCardTools;
 import com.decard.muye.sdk.IPersonFaceManager;
 import com.decard.muye.sdk.InitDeviceCallBack;
 import com.decard.muye.sdk.MuyeIDCard;
@@ -169,6 +170,7 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
         stopCompare();
         CameraUtils.getInstance().closeCamera();
         unbindService(connection);
+        IDCardTools.getInstance(this).stopReadIdCard();
     }
     
     @Override
@@ -364,10 +366,22 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
                                 byte[] buf = new byte[WLTService.imgLength];
                                 if(1 == WLTService.wlt2Bmp(idCard.getPhoto(), buf)) {
                                     Bitmap bitmap = IDPhotoHelper.Bgr2Bitmap(buf);
-                                    
-                                    runOnUiThread(() ->
-                                            mPersonEditImgId.setImageBitmap(bitmap));
-                                    idPhoto = ImageUtil.bitmapToBase64(bitmap);
+                                    runOnUiThread(() -> {
+                                        mPersonEditImgId.setImageBitmap(bitmap);
+                                        idPhoto = ImageUtil.bitmapToBase64(bitmap);
+                                        name = idCard.getName();
+                                        minzu = idCard.getNation();
+                                        address = idCard.getAddress();
+                                        id_number = idCard.getId();
+                                        String birth = idCard.getBirth();
+                                        birth = birth.replace("日", "").replace("年", "-").replace("月", "-");
+                                        mPersonEditEtName.setText(idCard.getName());
+                                        mPersonEditEtId.setText(idCard.getId());
+                                        mPersonEditTvSex.setText(idCard.getSex());
+                                        mPersonEditEtMinzu.setText(idCard.getNation() + "族");
+                                        mPersonEditTvBirthday.setText(birth);
+                                        mPersonEditEtAddress.setText(idCard.getAddress());
+                                    });
                                 }
                             }
                             startCompare(idCard, 0);
@@ -392,26 +406,6 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
                     byte[] buf = new byte[WLTService.imgLength];
                     if(1 == WLTService.wlt2Bmp(idCard.getPhoto(), buf)) {
                         Bitmap bitmap = IDPhotoHelper.Bgr2Bitmap(buf);
-                        
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mPersonEditImgId.setImageBitmap(bitmap);
-                                idPhoto = ImageUtil.bitmapToBase64(bitmap);
-                                name = idCard.getName();
-                                minzu = idCard.getNation();
-                                address = idCard.getAddress();
-                                id_number = idCard.getId();
-                                String birth = idCard.getBirth();
-                                birth = birth.replace("日", "").replace("年", "-").replace("月", "-");
-                                mPersonEditEtName.setText(idCard.getName());
-                                mPersonEditEtId.setText(idCard.getId());
-                                mPersonEditTvSex.setText(idCard.getSex());
-                                mPersonEditEtMinzu.setText(idCard.getNation() + "族");
-                                mPersonEditTvBirthday.setText(birth);
-                                mPersonEditEtAddress.setText(idCard.getAddress());
-                            }
-                        });
                         File file = FileUtils.bitmapToFile(bitmap, String.valueOf(System.currentTimeMillis()));  //用身份证照片人脸注册
                         if(file == null) {
                             return;
@@ -431,8 +425,6 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
                                         image.compressToJpeg(new Rect(0, 0, 640, 480), 80, stream);
                                         Bitmap bitmap1 = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
                                         Bitmap rotateBitmap = CameraUtils.getInstance().rotate(bitmap1, 90f);
-                                        stopCompare();
-                                        deleteFile(file.getName());
                                         mPersonEditImgFace.setImageBitmap(rotateBitmap);
                                         facePhoto = ImageUtil.bitmapToBase64(rotateBitmap);
                                         BigDecimal bigDecimal_split = new BigDecimal(split[1]);
@@ -442,6 +434,8 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
                                         person_edit_tv_result.setText("相似度:" + bigDecimal_result.toString() + "%");
                                         person_edit_textureView.setVisibility(View.GONE);
                                         mPersonEditLayoutRight.setVisibility(View.VISIBLE);
+                                        stopCompare();
+                                        deleteFile(file.getName());
                                     } catch(UnsupportedEncodingException e) {
                                         e.printStackTrace();
                                     }
@@ -472,10 +466,10 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
                                 image.compressToJpeg(new Rect(0, 0, 640, 480), 80, stream);
                                 Bitmap bitmap1 = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
                                 Bitmap rotateBitmap = CameraUtils.getInstance().rotate(bitmap1, 90f);
-                                stopCompare();
                                 mPersonEditImgFace.setImageBitmap(rotateBitmap);
                                 facePhoto = ImageUtil.bitmapToBase64(rotateBitmap);
                                 person_edit_textureView.setVisibility(View.GONE);
+                                stopCompare();
                                 
                             } catch(UnsupportedEncodingException e) {
                                 e.printStackTrace();
@@ -684,7 +678,7 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
                     ToastUtil.showToast("请填写正确的手机号码");
                 }
                 else {
-                    presenter.editEmployeesInfo(id, idPhoto, facePhoto, name,
+                    presenter.editEmployeesInfo(id, facePhoto, idPhoto, name,
                             id_number, mPersonEditTvSex.getText().toString(), mPersonEditTvBirthday.getText().toString(), minzu,
                             address, phone, mPersonEditTvZhengzhi.getText().toString(), mPersonEditTvJiguan.getText().toString(),
                             mPersonEditTvWenhua.getText().toString(), mPersonEditTvLeader.getText().toString(), mPersonEditTvPeixun.getText().toString(),
@@ -887,8 +881,8 @@ public class PersonEditActivity extends BaseFragmentActivity<PersonEditContract.
     @Override
     public void setEmployeeInfo(EmployeeBean employeeBean) {
         this.employeeBean = employeeBean;
-        Glide.with(PersonEditActivity.this).load(employeeBean.employee.photoPath).apply(ImageUtil.getRequestOptions()).into(mPersonEditImgFace);
-        Glide.with(PersonEditActivity.this).load(employeeBean.employee.idPhotoPath).apply(ImageUtil.getRequestOptions()).into(mPersonEditImgId);
+        Glide.with(PersonEditActivity.this).load(employeeBean.employee.idPhotoPath).apply(ImageUtil.getRequestOptions()).into(mPersonEditImgFace);
+        Glide.with(PersonEditActivity.this).load(employeeBean.employee.photoPath).apply(ImageUtil.getRequestOptions()).into(mPersonEditImgId);
         mPersonEditEtName.setText(employeeBean.employee.name);
         mPersonEditEtId.setText(employeeBean.employee.idCard);
         mPersonEditTvSex.setText(employeeBean.employee.sex);

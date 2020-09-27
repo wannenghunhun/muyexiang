@@ -6,18 +6,13 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.framwork.common.GlobalContext;
-import com.framwork.common.helper.AppActiveHelper;
-import com.framwork.common.helper.ServerHelper;
-import com.framwork.common.helper.net.ReleaseServerConfig;
 import com.framwork.common.ui.activity.DLRActivityLifecycle;
 import com.framwork.common.ui.fragment.DLRFragmentLifecycle;
 import com.framwork.common.ui.lifecycle.ActivityLifecycle;
 import com.framwork.common.ui.lifecycle.FragmentLifecycle;
 import com.framwork.common.ui.lifecycle.IActivityLifecycle;
 import com.framwork.common.ui.lifecycle.IFragmentLifecycle;
-import com.framwork.common.utils.AppUtil;
 import com.framwork.common.utils.GlobalTools;
-import com.framwork.common.utils.SPManager;
 import com.framwork.main.http.interceptor.RequestEncryptInterceptor;
 import com.framwork.main.http.interceptor.ResponseDecryptInterceptor;
 import com.framwork.main.http.interceptor.ResponseGzipInterceptor;
@@ -41,9 +36,7 @@ public class MyApplication extends Application {
     public final void onCreate() {
         super.onCreate();
         GlobalContext.setContext(this);
-        if(AppUtil.isInitAble()) {
-            initInstall();
-        }
+        initInstall();
     }
     
     
@@ -52,8 +45,6 @@ public class MyApplication extends Application {
         addActivityLifeCycle(new DLRActivityLifecycle());
         addFragmentLifeCycle(new DLRFragmentLifecycle());
         ARouter.init(this);
-        //        ServerHelper.init(ServerHelper.ServerReleaseType, new ReleaseServerConfig());
-        //        AppActiveHelper.install(this);
         initOkHttpClient();
     }
     
@@ -61,10 +52,10 @@ public class MyApplication extends Application {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .addInterceptor(new RequestEncryptInterceptor())  // 请求参数加密拦截器
-                .addNetworkInterceptor(new ResponseDecryptInterceptor()) // 响应解密拦截器
-                .addNetworkInterceptor(new ResponseGzipInterceptor()); // Gzip 解压拦截器
+                .writeTimeout(60, TimeUnit.SECONDS);
+//                .addInterceptor(new RequestEncryptInterceptor())  // 请求参数加密拦截器
+//                .addNetworkInterceptor(new ResponseDecryptInterceptor()) // 响应解密拦截器
+//                .addNetworkInterceptor(new ResponseGzipInterceptor()); // Gzip 解压拦截器
         OkHttpUtils.init(builder, true);
     }
     

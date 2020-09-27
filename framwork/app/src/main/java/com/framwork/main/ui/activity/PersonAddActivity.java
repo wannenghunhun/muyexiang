@@ -37,6 +37,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.decard.muye.sdk.FaceCallBack;
 import com.decard.muye.sdk.ICardCallBack;
+import com.decard.muye.sdk.IDCardTools;
 import com.decard.muye.sdk.IPersonFaceManager;
 import com.decard.muye.sdk.InitDeviceCallBack;
 import com.decard.muye.sdk.MuyeIDCard;
@@ -69,7 +70,6 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -167,6 +167,7 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
         stopCompare();
         CameraUtils.getInstance().closeCamera();
         unbindService(connection);
+        IDCardTools.getInstance(this).stopReadIdCard();
     }
     
     @Override
@@ -366,10 +367,22 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                                 byte[] buf = new byte[WLTService.imgLength];
                                 if(1 == WLTService.wlt2Bmp(idCard.getPhoto(), buf)) {
                                     Bitmap bitmap = IDPhotoHelper.Bgr2Bitmap(buf);
-                                    
-                                    runOnUiThread(() ->
-                                            mPersonAddImgId.setImageBitmap(bitmap));
-                                    idPhoto = ImageUtil.bitmapToBase64(bitmap);
+                                    runOnUiThread(() -> {
+                                        mPersonAddImgId.setImageBitmap(bitmap);
+                                        idPhoto = ImageUtil.bitmapToBase64(bitmap);
+                                        name = idCard.getName();
+                                        minzu = idCard.getNation();
+                                        address = idCard.getAddress();
+                                        id_number = idCard.getId();
+                                        String birth = idCard.getBirth();
+                                        birth = birth.replace("日", "").replace("年", "-").replace("月", "-");
+                                        mPersonAddEtName.setText(idCard.getName());
+                                        mPersonAddEtId.setText(idCard.getId());
+                                        mPersonAddTvSex.setText(idCard.getSex());
+                                        mPersonAddEtMinzu.setText(idCard.getNation() + "族");
+                                        mPersonAddTvBirthday.setText(birth);
+                                        mPersonAddEtAddress.setText(idCard.getAddress());
+                                    });
                                 }
                             }
                             startCompare(idCard, 0);
@@ -394,26 +407,6 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                     byte[] buf = new byte[WLTService.imgLength];
                     if(1 == WLTService.wlt2Bmp(idCard.getPhoto(), buf)) {
                         Bitmap bitmap = IDPhotoHelper.Bgr2Bitmap(buf);
-                        
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mPersonAddImgId.setImageBitmap(bitmap);
-                                idPhoto = ImageUtil.bitmapToBase64(bitmap);
-                                name = idCard.getName();
-                                minzu = idCard.getNation();
-                                address = idCard.getAddress();
-                                id_number = idCard.getId();
-                                String birth = idCard.getBirth();
-                                birth = birth.replace("日", "").replace("年", "-").replace("月", "-");
-                                mPersonAddEtName.setText(idCard.getName());
-                                mPersonAddEtId.setText(idCard.getId());
-                                mPersonAddTvSex.setText(idCard.getSex());
-                                mPersonAddEtMinzu.setText(idCard.getNation() + "族");
-                                mPersonAddTvBirthday.setText(birth);
-                                mPersonAddEtAddress.setText(idCard.getAddress());
-                            }
-                        });
                         File file = FileUtils.bitmapToFile(bitmap, String.valueOf(System.currentTimeMillis()));  //用身份证照片人脸注册
                         if(file == null) {
                             return;
@@ -432,8 +425,6 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                                         image.compressToJpeg(new Rect(0, 0, 640, 480), 80, stream);
                                         Bitmap bitmap1 = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
                                         Bitmap rotateBitmap = CameraUtils.getInstance().rotate(bitmap1, 90f);
-                                        stopCompare();
-                                        deleteFile(file.getName());
                                         mPersonAddImgFace.setImageBitmap(rotateBitmap);
                                         facePhoto = ImageUtil.bitmapToBase64(rotateBitmap);
                                         BigDecimal bigDecimal_split = new BigDecimal(split[1]);
@@ -443,6 +434,8 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                                         person_add_tv_result.setText("相似度:" + bigDecimal_result.toString() + "%");
                                         person_add_textureView.setVisibility(View.GONE);
                                         mPersonAddLayoutRight.setVisibility(View.VISIBLE);
+                                        stopCompare();
+                                        deleteFile(file.getName());
                                         
                                     } catch(UnsupportedEncodingException e) {
                                         e.printStackTrace();
@@ -474,10 +467,10 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                                 image.compressToJpeg(new Rect(0, 0, 640, 480), 80, stream);
                                 Bitmap bitmap1 = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
                                 Bitmap rotateBitmap = CameraUtils.getInstance().rotate(bitmap1, 90f);
-                                stopCompare();
                                 mPersonAddImgFace.setImageBitmap(rotateBitmap);
                                 facePhoto = ImageUtil.bitmapToBase64(rotateBitmap);
                                 person_add_textureView.setVisibility(View.GONE);
+                                stopCompare();
                                 
                             } catch(UnsupportedEncodingException e) {
                                 e.printStackTrace();
@@ -688,7 +681,7 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                     ToastUtil.showToast("请填写正确的手机号码");
                 }
                 else {
-                    presenter.addEmployeesInfo("", idPhoto, facePhoto, name,
+                    presenter.addEmployeesInfo("", facePhoto, idPhoto, name,
                             id_number, mPersonAddTvSex.getText().toString(), mPersonAddTvBirthday.getText().toString(), minzu,
                             address, phone, mPersonAddTvZhengzhi.getText().toString(), mPersonAddTvJiguan.getText().toString(),
                             mPersonAddTvWenhua.getText().toString(), mPersonAddTvLeader.getText().toString(), mPersonAddTvPeixun.getText().toString(),

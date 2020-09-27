@@ -170,19 +170,17 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/person_edit_img_id"
-                android:layout_width="190dp"
-                android:layout_height="240dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_userface" />
-
-            <ImageView
                 android:id="@+id/person_edit_img_face"
                 android:layout_width="190dp"
                 android:layout_height="240dp"
+                android:scaleType="centerCrop"  />
+
+            <ImageView
+                android:id="@+id/person_edit_img_id"
+                android:layout_width="190dp"
+                android:layout_height="240dp"
                 android:layout_marginStart="16dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_userface" />
+                android:scaleType="centerCrop"  />
         </LinearLayout>
 
         <TextureView
