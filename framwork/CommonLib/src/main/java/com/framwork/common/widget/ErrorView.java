@@ -1,6 +1,6 @@
 package com.framwork.common.widget;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;

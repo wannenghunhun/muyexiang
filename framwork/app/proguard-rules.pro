@@ -42,7 +42,7 @@
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
--keep public class * extends android.support.v4.**
+-keep public class * extends androidx.fragment.**
 -keep public class com.android.vending.licensing.ILicensingService
 -keep class android.support.**{*;}
 
@@ -80,21 +80,21 @@
    *** get*();
 }
 
--keep class android.support.annotation.Keep
--keep @android.support.annotation.Keep class * {
+-keep class androidx.annotation.Keep
+-keep @androidx.annotation.Keep class * {
 *;
 }
 
 -keepclasseswithmembers class * {
-    @android.support.annotation.Keep <methods>;
+    @androidx.annotation.Keep <methods>;
 }
 
 -keepclasseswithmembers class * {
-    @android.support.annotation.Keep <fields>;
+    @androidx.annotation.Keep <fields>;
 }
 
 -keepclasseswithmembers class * {
-    @android.support.annotation.Keep <init>(...);
+    @androidx.annotation.Keep <init>(...);
 }
 #Android Anotation  end
 

@@ -1,8 +1,9 @@
 package com.framwork.common.adapter.adapterview;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
-import android.support.v4.util.SparseArrayCompat;
+import androidx.annotation.IdRes;
+import androidx.collection.SparseArrayCompat;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;

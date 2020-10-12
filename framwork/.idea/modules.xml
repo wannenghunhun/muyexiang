@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CommonLib/CommonLib.iml" filepath="$PROJECT_DIR$/.idea/modules/CommonLib/CommonLib.iml" group="framwork/CommonLib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="framwork/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/framwork.iml" filepath="$PROJECT_DIR$/.idea/modules/framwork.iml" group="framwork" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/okhttputils/okhttputils.iml" filepath="$PROJECT_DIR$/.idea/modules/okhttputils/okhttputils.iml" group="framwork/okhttputils" />
+    </modules>
+  </component>
+</project>

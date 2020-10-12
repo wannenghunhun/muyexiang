@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: :muyeSDK-release:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/jars/libs/arcsoft_face.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/jars/libs/arcsoft_image_util.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/jars/libs/BASE64Encoder.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/jars/libs/zkandroidcore.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74706617cd3bd1131baa077065a185d8/jars/libs/zkandroididcardreader.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

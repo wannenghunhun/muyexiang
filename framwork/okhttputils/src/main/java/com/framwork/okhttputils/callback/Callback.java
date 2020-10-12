@@ -1,9 +1,9 @@
 package com.framwork.okhttputils.callback;
 
-import android.support.annotation.Nullable;
 
 import java.io.IOException;
 
+import androidx.annotation.Nullable;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -38,7 +38,7 @@ public abstract class Callback<T> {
      */
     public abstract T parseNetworkResponse(Response response) throws IOException, Exception;
 
-    public abstract void onFailure(@Nullable Request request,@Nullable Response response,@Nullable Exception e);
+    public abstract void onFailure(@Nullable Request request, @Nullable Response response, @Nullable Exception e);
 
     public abstract void onResponse(T response);
 

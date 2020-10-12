@@ -8,11 +8,12 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.content.LocalBroadcastManager;
 
 import com.framwork.common.GlobalContext;
 
 import java.io.File;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  *

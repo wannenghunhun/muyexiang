@@ -1,7 +1,7 @@
 package com.framwork.common.helper;
 
 import android.content.Context;
-import android.support.annotation.StringDef;
+import androidx.annotation.StringDef;
 
 import com.framwork.common.helper.net.IServerConfig;
 import com.framwork.common.helper.net.ReleaseServerConfig;

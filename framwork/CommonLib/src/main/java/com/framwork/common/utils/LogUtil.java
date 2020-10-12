@@ -1,6 +1,6 @@
 package com.framwork.common.utils;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.orhanobut.logger.Logger;
 

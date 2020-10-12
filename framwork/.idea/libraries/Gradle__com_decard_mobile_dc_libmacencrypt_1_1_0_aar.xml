@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.decard.mobile:dc-libmacencrypt:1.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d1dc7ed04a826d5263889a124bc19279/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d1dc7ed04a826d5263889a124bc19279/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d1dc7ed04a826d5263889a124bc19279/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d1dc7ed04a826d5263889a124bc19279/jars/libs/GMAlg-jni-1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.decard.mobile/dc-libmacencrypt/1.1.0/c6172c9b5666767fc42261cded0c119eb79c3329/dc-libmacencrypt-1.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

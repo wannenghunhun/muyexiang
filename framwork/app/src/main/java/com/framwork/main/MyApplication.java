@@ -2,7 +2,6 @@ package com.framwork.main;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.framwork.common.GlobalContext;
@@ -20,6 +19,7 @@ import com.framwork.okhttputils.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.multidex.MultiDex;
 import okhttp3.OkHttpClient;
 
 

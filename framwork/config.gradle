@@ -14,7 +14,7 @@ ext {
 
     classpathRep = [
             tinker            : 'com.tencent.bugly:tinker-support:1.1.5',
-            symtabfileuploader: 'com.tencent.bugly:symtabfileuploader:2.1.2',
+            symtabfileuploader: 'com.tencent.bugly:symtabfileuploader:2.2.1',
             walle             : 'com.meituan.android.walle:plugin:1.1.5',
     ]
 

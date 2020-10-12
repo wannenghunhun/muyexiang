@@ -1,11 +1,12 @@
 package com.framwork.common.adapter.recycleview;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  */

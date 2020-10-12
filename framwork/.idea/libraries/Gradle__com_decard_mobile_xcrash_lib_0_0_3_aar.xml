@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.decard.mobile:xcrash-lib:0.0.3@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f3e5f7bf82de711f20655a63a8a9e54/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f3e5f7bf82de711f20655a63a8a9e54/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f3e5f7bf82de711f20655a63a8a9e54/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.decard.mobile/xcrash-lib/0.0.3/bac83d23b419b426f2c03a628dbdbc7d6547ac32/xcrash-lib-0.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

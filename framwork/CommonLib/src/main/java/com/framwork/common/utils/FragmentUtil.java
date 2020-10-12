@@ -1,9 +1,9 @@
 package com.framwork.common.utils;
 
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Created by liuwenjie on 16/3/9.
@@ -12,8 +12,8 @@ import android.support.v4.app.FragmentTransaction;
 public final  class FragmentUtil {
 
     /**
-     * @param activity   android.support.v4.app.FragmentActivity
-     * @param fragment   android.support.v4.app.Fragment
+     * @param activity   androidx.fragment.app.FragmentActivity
+     * @param fragment   androidx.fragment.app.Fragment
      * @param fragmentId 布局 id
      */
     public static void addFragmentIntoActivity(FragmentActivity activity, Fragment fragment, int fragmentId) {
@@ -23,8 +23,8 @@ public final  class FragmentUtil {
     }
 
     /**
-     * @param baseFragment android.support.v4.app.Fragment
-     * @param fragment     android.support.v4.app.Fragment
+     * @param baseFragment androidx.fragment.app.Fragment
+     * @param fragment     androidx.fragment.app.Fragment
      * @param fragmentId   布局 id
      */
     public static void addFragmentIntoFragment(Fragment baseFragment, Fragment fragment, int fragmentId) {

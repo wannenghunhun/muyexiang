@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.decard.mobile:logansdk-utils:2.2.03@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e6c6df013c0f6b3ffd6e2cb274abb401/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e6c6df013c0f6b3ffd6e2cb274abb401/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e6c6df013c0f6b3ffd6e2cb274abb401/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.decard.mobile/logansdk-utils/2.2.03/c25c977bb19a8cecc03918b0c604bea96c43206d/logansdk-utils-2.2.03-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -41,4 +41,5 @@ dependencies {
     implementation rootProject.dependenciesRep.bugly
     implementation rootProject.dependenciesRep.tinker
     implementation rootProject.dependenciesRep.smartRefresh
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 }

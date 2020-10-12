@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.decard.mobile:dc-libreadsn:0.0.9@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f869fed08fafd4191b8c496680d41fb9/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f869fed08fafd4191b8c496680d41fb9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f869fed08fafd4191b8c496680d41fb9/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.decard.mobile/dc-libreadsn/0.0.9/12200ddbf2dfeaff977014b754b0651a2fe7d4df/dc-libreadsn-0.0.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

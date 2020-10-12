@@ -1,7 +1,7 @@
 package com.framwork.common.widget.excpetion.base;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.view.View;
 
 /**

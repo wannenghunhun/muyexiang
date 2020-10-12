@@ -1,7 +1,7 @@
 package com.framwork.common.ui.lifecycle;
 
-import android.support.annotation.MainThread;
-import android.support.v4.app.Fragment;
+import androidx.annotation.MainThread;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
