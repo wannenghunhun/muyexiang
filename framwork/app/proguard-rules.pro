@@ -198,3 +198,9 @@
 -keep class com.framwork.main.bean.** {
     *;
  }
+-keep class com.zkteco.android.IDReader.** {
+      *;
+   }
+-keep class com.decard.muye.sdk.** {
+      *;
+   }

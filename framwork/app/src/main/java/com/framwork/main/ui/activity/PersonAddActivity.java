@@ -2,6 +2,7 @@ package com.framwork.main.ui.activity;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
@@ -12,7 +13,6 @@ import android.graphics.YuvImage;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -58,6 +58,7 @@ import com.framwork.main.bean.UserInfoBean;
 import com.framwork.main.event.EditEvent;
 import com.framwork.main.ui.contract.PersonAddContract;
 import com.framwork.main.ui.presenter.PersonAddPresenter;
+import com.framwork.main.util.CameraDialog;
 import com.framwork.main.util.ImageUtil;
 import com.framwork.main.util.LoginUtil;
 import com.zkteco.android.IDReader.IDPhotoHelper;
@@ -74,6 +75,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.annotation.NonNull;
 
 public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Presenter> implements PersonAddContract.View {
     private RelativeLayout mPersonAddLayoutTitle;
@@ -145,6 +148,8 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
     private IPersonFaceManager faceManager;
     public String idPhoto = "";
     public String facePhoto = "";
+    private CameraDialog cameraDialog;
+    private boolean isUnbind = true;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,15 +169,13 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stopCompare();
-        CameraUtils.getInstance().closeCamera();
-        unbindService(connection);
-        IDCardTools.getInstance(this).stopReadIdCard();
+        stopCatchInfo();
     }
     
     @Override
     public void onStop() {
         super.onStop();
+        //        stopCatchInfo();
     }
     
     @Override
@@ -277,7 +280,8 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
     }
     
     private void initSDK() {
-        CameraUtils.getInstance().startCamera(person_add_textureView, this);
+        //        CameraUtils.getInstance().startCamera(person_add_textureView, this);
+        setDialog();
         Intent intent = new Intent(this, RemoteFaceService.class);
         bindService(intent, connection, BIND_AUTO_CREATE);
         startService(intent);
@@ -319,6 +323,10 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                                 if(errorCode == 0) {
                                     initFace();  //初始化人脸
                                 }
+                                else {
+                                    showToast("设备初始化失败");
+                                    unbind();
+                                }
                             }
                         });
             } catch(RemoteException e) {
@@ -340,6 +348,7 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                     public void fail(String errorMsg) {
                         LogUtil.e(errorMsg);
                         showToast("人脸信息异常  " + errorMsg);
+                        unbind();
                     }
                     
                 });
@@ -356,6 +365,10 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                     @Override
                     public void onError(String errmsg) {
                         LogUtil.e("onError: " + errmsg);
+                        showToast(errmsg);
+                        showToast(errmsg);
+                        unbind();
+                        cameraDialog.dismiss();
                     }
                     
                     @Override
@@ -432,7 +445,8 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                                         BigDecimal bigDecimal_100 = new BigDecimal("100");
                                         BigDecimal bigDecimal_result = bigDecimal_p.multiply(bigDecimal_100);
                                         person_add_tv_result.setText("相似度:" + bigDecimal_result.toString() + "%");
-                                        person_add_textureView.setVisibility(View.GONE);
+                                        //                                        person_add_textureView.setVisibility(View.GONE);
+                                        cameraDialog.dismiss();
                                         mPersonAddLayoutRight.setVisibility(View.VISIBLE);
                                         stopCompare();
                                         deleteFile(file.getName());
@@ -469,7 +483,8 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                                 Bitmap rotateBitmap = CameraUtils.getInstance().rotate(bitmap1, 90f);
                                 mPersonAddImgFace.setImageBitmap(rotateBitmap);
                                 facePhoto = ImageUtil.bitmapToBase64(rotateBitmap);
-                                person_add_textureView.setVisibility(View.GONE);
+                                //                                person_add_textureView.setVisibility(View.GONE);
+                                cameraDialog.dismiss();
                                 stopCompare();
                                 
                             } catch(UnsupportedEncodingException e) {
@@ -483,6 +498,7 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
                             stopCompare();
                             LogUtil.e(errorMsg);
                             showToast(errorMsg);
+                            unbind();
                         }
                     });
                 }
@@ -509,6 +525,38 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
             } catch(RemoteException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    
+    private void setDialog() {
+        cameraDialog = new CameraDialog(this);
+        cameraDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                stopCatchInfo();
+                CameraUtils.getInstance().closeCamera();
+            }
+        });
+        cameraDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                stopCatchInfo();
+                CameraUtils.getInstance().closeCamera();
+            }
+        });
+    }
+    
+    private void stopCatchInfo() {
+        stopCompare();
+        CameraUtils.getInstance().closeCamera();
+        unbind();
+        IDCardTools.getInstance(this).stopReadIdCard();
+    }
+    
+    private void unbind() {
+        if(isUnbind) {
+            unbindService(connection);
+            isUnbind = false;
         }
     }
     
@@ -647,10 +695,11 @@ public class PersonAddActivity extends BaseFragmentActivity<PersonAddContract.Pr
         person_add_layout_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(View.VISIBLE != person_add_textureView.getVisibility()) {
-                    person_add_textureView.setVisibility(View.VISIBLE);
-                    readId();
-                }
+                //                if(View.VISIBLE != person_add_textureView.getVisibility()) {
+                //                    person_add_textureView.setVisibility(View.VISIBLE);
+                readId();
+                cameraDialog.show();
+                //                }
             }
         });
         mPersonAddTvAddinfo.setOnClickListener(new View.OnClickListener() {

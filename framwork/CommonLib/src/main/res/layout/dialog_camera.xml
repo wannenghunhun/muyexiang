@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/button_cornor_white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/dialog_camera_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon_camera" />
+
+    <ImageView
+        android:id="@+id/dialog_camera_close"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_close" />
+
+    <TextView
+        android:id="@+id/dialog_camera_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_camera_logo"
+        android:layout_marginTop="16dp"
+        android:text="请将摄像头对准采集人员，同时将身份证贴近设备，系统自动完成人脸识别"
+        android:textColor="@color/black_FF333333"
+        android:textSize="14sp" />
+
+    <TextureView
+        android:id="@+id/dialog_camera_textureView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/dialog_camera_des"
+        android:layout_marginTop="16dp" />
+</RelativeLayout>
